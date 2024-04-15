@@ -4,6 +4,7 @@ import type { MenuItem, OrderItem } from "../types"
 const useOrder = () => {
 
     const [order, setOrder] = useState<OrderItem[]>([])
+    const [tip, setTip] = useState(0)
 
     const addItem = (item: MenuItem) => {
         const itemExist = order.findIndex((el) => el.id === item.id)
@@ -22,9 +23,14 @@ const useOrder = () => {
         setOrder(orderFilter)
     }
 
-    const [tip, setTip] = useState(0)
-    const handleTip = (e) => {
-        setTip(e.target.value)
+    const handleTip = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newTip = e.target.value
+        setTip(Number(newTip))
+    }
+
+    const placeOrder = () => {
+        setOrder([])
+        setTip(0)
     }
 
     return {
@@ -32,7 +38,8 @@ const useOrder = () => {
         order,
         removeItem,
         handleTip,
-        tip
+        tip,
+        placeOrder
     }
 
 }

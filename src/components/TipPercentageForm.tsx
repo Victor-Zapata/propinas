@@ -18,25 +18,27 @@ const tipOptions = [
 ]
 
 type TipPercentageFormProps = {
-    handleTip: (e: any) => void
+    handleTip: (e: React.ChangeEvent<HTMLInputElement>) => void
+    tip: number
 }
 
-const TipPercentageForm = ({ handleTip }: TipPercentageFormProps) => {
+const TipPercentageForm = ({ handleTip, tip }: TipPercentageFormProps) => {
 
     return (
         <div>
             <h2 className="font-black text-2xl">Propina: {''}</h2>
 
             <form action="">
-                {tipOptions.map((tip) => {
-                    return <div key={tip.id} className="flex gap-2">
-                        <label htmlFor={tip.id}>{tip.label}</label>
+                {tipOptions.map((tipOption) => {
+                    return <div key={tipOption.id} className="flex gap-2">
+                        <label htmlFor={tipOption.id}>{tipOption.label}</label>
                         <input
                             type="radio"
-                            id={tip.id}
-                            name="tip"
-                            value={tip.value}
+                            id={tipOption.id}
+                            name="tipOptions"
+                            value={tipOption.value}
                             onChange={(e) => handleTip(e)}
+                            checked={tipOption.value == tip}
                         />
                     </div>
                 })}
